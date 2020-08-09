@@ -1,0 +1,15 @@
+{
+  "name": "willhackett-com",
+  "version": 2,
+  "alias": ["willhackett.com"],
+  "routes": [
+    { "src": "/assets/(.*)", "dest": "http://assets.willhackett.com/$1" },
+    {
+      "src": "/media/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000, stale-while-revalidate"
+      },
+      "dest": "https://media.graphcms.com/$1"
+    }
+  ]
+}
