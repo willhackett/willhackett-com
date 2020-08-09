@@ -1,6 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { gql } from 'graphql-request';
 
 import cms from '../../modules/cms';
 import { GetServerSidePropsContext } from 'next';
@@ -8,6 +6,10 @@ import { GetServerSidePropsContext } from 'next';
 interface PostProps {
   title: string;
   excerpt: string;
+}
+
+interface RouteProps {
+  [slug: string]: string | string[];
 }
 
 const Post = ({ title, excerpt }: PostProps) => {
@@ -22,17 +24,17 @@ const Post = ({ title, excerpt }: PostProps) => {
 export default Post;
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext<RouteProps>
 ) => {
-  const {
-    params: { slug },
-  } = context;
+  const slug = context.params?.slug as string;
 
-  console.log(slug);
+  if (!slug) {
+    return null;
+  }
 
   try {
     const { insight } = await cms.request(
-      gql`
+      `
         query InsightQuery($slug: String!) {
           insight(where: { slug: $slug }) {
             title

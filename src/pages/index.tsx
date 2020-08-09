@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { gql } from 'graphql-request';
 
 import Layout from '../components/Layout';
 import BioText from '../components/BioText';
@@ -74,8 +73,7 @@ export default IndexPage;
 
 export const getServerSideProps = async () => {
   try {
-    const props = await cms.request(
-      gql`
+    const { data } = await cms.request(`
         query IndexQuery {
           page(where: { slug: "/" }) {
             title
@@ -95,11 +93,10 @@ export const getServerSideProps = async () => {
             }
           }
         }
-      `
-    );
+      `);
 
     return {
-      props,
+      props: data,
     };
   } catch {
     return null;
