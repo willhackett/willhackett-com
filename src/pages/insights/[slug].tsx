@@ -1,5 +1,3 @@
-import React from 'react';
-
 import cms from '../../modules/cms';
 import { GetServerSidePropsContext } from 'next';
 
