@@ -7,6 +7,7 @@ import Markdown from '../components/Markdown';
 import cms from '../modules/cms';
 
 import { LATO_FONT } from '../fonts';
+import { GetServerSidePropsContext } from 'next';
 
 interface InsightPostProps {
   id: string;
@@ -70,7 +71,19 @@ const IndexPage = ({
 
 export default IndexPage;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({
+  req,
+}: GetServerSidePropsContext) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (
+      ['117.20.66.181', '117.20.66.182'].includes(
+        (req.headers['x-real-ip'] as string) || ''
+      ) === false
+    ) {
+      throw new Error('Not Authorised');
+    }
+  }
+
   try {
     const { data } = await cms.request(`
         query IndexQuery {
