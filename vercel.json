@@ -1,7 +1,7 @@
 {
   "name": "willhackett-com",
   "version": 2,
-  "alias": ["willhackett.com"],
+  "alias": ["www.willhackett.com", "willhackett.com"],
   "routes": [
     { "src": "/assets/(.*)", "dest": "http://assets.willhackett.com/$1" },
     {

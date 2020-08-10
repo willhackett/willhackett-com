@@ -25,6 +25,7 @@ export const getServerSideProps = async () => {
   try {
     const { data } = await cms.request(`
         query {
+
           page(where: { slug: "/profile" }) {
             title
             seoDescription
