@@ -12,7 +12,7 @@
       "dest": "https://media.graphcms.com/$1"
     },
     {
-      "src": "/graph/",
+      "src": "/graph",
       "headers": {
         "cache-control": "s-maxage=1, stale-while-revalidate"
       },
