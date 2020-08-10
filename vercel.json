@@ -10,6 +10,13 @@
         "cache-control": "s-maxage=31536000, stale-while-revalidate"
       },
       "dest": "https://media.graphcms.com/$1"
+    },
+    {
+      "src": "/graph/",
+      "headers": {
+        "cache-control": "s-maxage=1, stale-while-revalidate"
+      },
+      "dest": "https://api-ap-northeast-1.graphcms.com/v2/ckdmpk7cgqgd501yvagwihf29/master"
     }
   ]
 }
