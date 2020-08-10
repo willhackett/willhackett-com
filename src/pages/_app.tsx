@@ -24,13 +24,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 `;
 
-const App = ({ Component, pageProps }: AppProps) => {
-  return (
-    <Root>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </Root>
-  );
-};
+const App = ({ Component, pageProps }: AppProps) => (
+  <Root>
+    <GlobalStyle />
+    <Component {...pageProps} />
+  </Root>
+);
 
 export default App;

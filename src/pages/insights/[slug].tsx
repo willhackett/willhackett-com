@@ -10,14 +10,12 @@ interface RouteProps {
   [slug: string]: string | string[];
 }
 
-const Post = ({ title, excerpt }: PostProps) => {
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>{excerpt}</p>
-    </div>
-  );
-};
+const Post = ({ title, excerpt }: PostProps) => (
+  <div>
+    <h1>{title}</h1>
+    <p>{excerpt}</p>
+  </div>
+);
 
 export default Post;
 
