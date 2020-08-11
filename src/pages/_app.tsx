@@ -3,10 +3,10 @@ import { AppProps } from 'next/app';
 import styled, { createGlobalStyle } from 'styled-components';
 import 'milligram';
 
-import { LATO_FONT, AMIRI_FONT } from '../fonts';
+import { LATO_FONT, GARAMOND_FONT } from '../fonts';
 
 const Root = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lato:wght@300;400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Lato:wght@300;400&display=swap');
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -19,7 +19,7 @@ a {
   color: #001D33;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: ${AMIRI_FONT};
+  font-family: ${GARAMOND_FONT};
   font-weight: 400;
 }
 `;
