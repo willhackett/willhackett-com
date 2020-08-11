@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Layout from '../components/Layout';
-import BioText from '../components/BioText';
+import { BioHeading } from '../components/Heading';
 import Markdown from '../components/Markdown';
 
 import cms from '../modules/cms';
@@ -51,9 +51,9 @@ const IndexPage = ({
   page: { title, content, seoDescription },
 }: IndexProps) => (
   <Layout title={title} seoDescription={seoDescription}>
-    <BioText>
+    <BioHeading>
       <Markdown content={content} />
-    </BioText>
+    </BioHeading>
 
     <hr />
 
@@ -76,7 +76,7 @@ export const getServerSideProps = async ({
 }: GetServerSidePropsContext) => {
   if (process.env.NODE_ENV === 'production') {
     if (
-      ['117.20.66.181', '117.20.66.182'].includes(
+      ['117.20.66.181', '117.20.66.182', '49.177.130.159'].includes(
         (req.headers['x-real-ip'] as string) || ''
       ) === false
     ) {
