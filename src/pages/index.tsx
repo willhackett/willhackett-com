@@ -8,6 +8,7 @@ import cms from '../modules/cms';
 
 import { LATO_FONT } from '../fonts';
 import { GetServerSidePropsContext } from 'next';
+import InsightLink from '../components/InsightLink';
 
 interface InsightPostProps {
   id: string;
@@ -15,6 +16,7 @@ interface InsightPostProps {
   coverImage: {
     url: string;
   };
+  slug: string;
   excerpt: string;
 }
 
@@ -26,14 +28,6 @@ interface IndexProps {
     content: string;
   };
 }
-
-const InsightPost = ({ title, coverImage, excerpt }: InsightPostProps) => (
-  <div className="column">
-    <img src={coverImage.url} />
-    <h4>{title}</h4>
-    <p className="small">{excerpt}</p>
-  </div>
-);
 
 const InsightsTitle = styled.div`
   margin-top: 5rem;
@@ -63,7 +57,7 @@ const IndexPage = ({
 
     <div className="row">
       {insights.map((insight) => (
-        <InsightPost key={insight.id} {...insight} />
+        <InsightLink key={insight.id} {...insight} />
       ))}
     </div>
   </Layout>
@@ -96,6 +90,7 @@ export const getServerSideProps = async ({
             title
             excerpt
             publishedAt
+            slug
             coverImage {
               url(
                 transformation: {

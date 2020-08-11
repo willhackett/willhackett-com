@@ -1,19 +1,21 @@
 import cms from '../../modules/cms';
 import { GetServerSidePropsContext } from 'next';
+import Markdown from '../../components/Markdown';
 
 interface PostProps {
   title: string;
   excerpt: string;
+  content: string;
 }
 
 interface RouteProps {
   [slug: string]: string | string[];
 }
 
-const Post = ({ title, excerpt }: PostProps) => (
+const Post = ({ title, content }: PostProps) => (
   <div>
     <h1>{title}</h1>
-    <p>{excerpt}</p>
+    <Markdown content={content} />
   </div>
 );
 
@@ -24,17 +26,20 @@ export const getServerSideProps = async (
 ) => {
   const slug = context.params?.slug as string;
 
+  console.log(slug);
+
   if (!slug) {
-    return null;
+    return {};
   }
 
   try {
-    const { insight } = await cms.request(
+    const { data } = await cms.request(
       `
         query InsightQuery($slug: String!) {
           insight(where: { slug: $slug }) {
             title
             excerpt
+            content
           }
         }
       `,
@@ -43,12 +48,12 @@ export const getServerSideProps = async (
       }
     );
 
-    if (!insight) {
+    if (!data.insight) {
       return null;
     }
 
     return {
-      props: insight,
+      props: data.insight,
     };
   } catch {
     return null;

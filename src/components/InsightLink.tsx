@@ -11,13 +11,13 @@ interface InsightProps {
 
 const InsightLink = ({ title, coverImage, excerpt, slug }: InsightProps) => (
   <div className="column">
-    <Link href={`/$slug`}>
+    <Link href={`/insights/${slug}`}>
       <a title={title}>
         <img src={coverImage.url} alt={title} />
       </a>
     </Link>
     <h4>
-      <Link href={`/${slug}`}>
+      <Link href={`/insights/${slug}`}>
         <a>{title}</a>
       </Link>
     </h4>

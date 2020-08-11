@@ -25,11 +25,19 @@ const InsightsPage = ({ page: { content }, insights }: InsightsPageProps) => (
     <LargeHeading>Insights</LargeHeading>
     <Markdown content={content} />
     <hr />
-    <div className="row">
-      {insights.map((insight) => (
-        <InsightLink key={insight.id} {...insight} />
-      ))}
-    </div>
+    {(() => {
+      const ct = [];
+      for (let i = 0; i < Math.ceil(insights.length / 3); i++) {
+        ct.push(
+          <div key={i} className="row">
+            {insights.slice(0 + i, 3 + i).map((insight) => (
+              <InsightLink key={insight.id} {...insight} />
+            ))}
+          </div>
+        );
+      }
+      return ct;
+    })()}
   </Layout>
 );
 
