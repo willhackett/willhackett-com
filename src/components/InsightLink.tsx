@@ -1,6 +1,15 @@
 import Link from 'next/link';
 
-const InsightLink = ({ title, coverImage, excerpt, slug }) => (
+interface InsightProps {
+  title: string;
+  coverImage: {
+    url: string;
+  };
+  excerpt: string;
+  slug: string;
+}
+
+const InsightLink = ({ title, coverImage, excerpt, slug }: InsightProps) => (
   <div className="column">
     <Link href={`/$slug`}>
       <a title={title}>
