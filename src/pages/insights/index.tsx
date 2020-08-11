@@ -1,14 +1,35 @@
 import Layout from '../../components/Layout';
-import LargeHeading from '../../components/LargeHeading';
 import Markdown from '../../components/Markdown';
+import InsightLink from '../../components/InsightLink';
+import { LargeHeading } from '../../components/Heading';
 
 import cms from '../../modules/cms';
 
-const InsightsPage = ({ page: { content } }) => (
+type InsightsPageProps = {
+  page: {
+    content: string;
+  };
+  insights: {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    coverImage: {
+      url: string;
+    };
+  }[];
+};
+
+const InsightsPage = ({ page: { content }, insights }: InsightsPageProps) => (
   <Layout>
     <LargeHeading>Insights</LargeHeading>
     <Markdown content={content} />
     <hr />
+    <div className="row">
+      {insights.map((insight) => (
+        <InsightLink key={insight.id} {...insight} />
+      ))}
+    </div>
   </Layout>
 );
 

@@ -1,28 +1,26 @@
-import m from 'moment';
-
 import Layout from '../components/Layout';
 
 import cms from '../modules/cms';
 
-interface WorkExperienceProps {
-  dateFrom: 
-}
+// interface WorkExperienceProps {
+//   dateFrom:
+// }
 
-const WorkExperienceLine = () => (
-  <div className="row">
-    <div className="column">
+// const WorkExperienceLine = () => (
+//   <div className="row">
+//     <div className="column">
 
-    </div>
-  </div>
-)
+//     </div>
+//   </div>
+// )
 
-const Logo = () => (
-<div />
-)
+// const Logo = () => (
+// <div />
+// )
 
-const Project = () => (
-<div />
-)
+// const Project = () => (
+// <div />
+// )
 
 const Work = () => (
   <Layout>
