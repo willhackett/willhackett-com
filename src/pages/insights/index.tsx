@@ -39,17 +39,11 @@ const pageQuery = gql`
 `;
 
 export const getServerSideProps = async () => {
-  try {
-    const data = await cms.request(pageQuery);
+  const props = await cms.request(pageQuery);
 
-    console.log('DATA', data);
-
-    return {
-      props: data,
-    };
-  } catch {
-    return null;
-  }
+  return {
+    props,
+  };
 };
 
 export default InsightsPage;
