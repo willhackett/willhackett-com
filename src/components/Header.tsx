@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 
 const Root = styled.header`
@@ -60,7 +60,7 @@ const Header = () => (
       <NameContainer>
         <Link href="/">
           <a>
-            <img src="/img/will.jpg" alt="Will Hackett" />
+            <img alt="Will Hackett" src="/img/will.jpg" />
             <h1>Will Hackett</h1>
           </a>
         </Link>

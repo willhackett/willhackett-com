@@ -1,15 +1,14 @@
 import { GetServerSidePropsContext } from 'next';
 import styled from 'styled-components';
 
-import { PageLayout, SlimContainer } from '../components/Layout';
-import { Markdown } from '../components/Content';
 import {
   ArticleList,
   ArticlePreviewProps,
   ArticlePreviewFragment,
 } from '../components/Article';
+import { Markdown } from '../components/Content';
 import { BioHeading } from '../components/Heading';
-
+import { PageLayout, SlimContainer } from '../components/Layout';
 import { cms, gql } from '../modules/api';
 
 interface IndexProps {
@@ -29,7 +28,7 @@ const IndexPage = ({
   articles,
   page: { title, content, seoDescription },
 }: IndexProps) => (
-  <PageLayout title={title} seoDescription={seoDescription}>
+  <PageLayout seoDescription={seoDescription} title={title}>
     <BioHeading>
       <Markdown content={content} />
     </BioHeading>

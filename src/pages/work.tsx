@@ -1,5 +1,4 @@
 import { PageLayout } from '../components/Layout';
-
 import cms from '../modules/cms';
 
 // interface WorkExperienceProps {
