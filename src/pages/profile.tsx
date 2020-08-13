@@ -1,5 +1,5 @@
 import { Markdown } from '../components/Content';
-import { PageLayout } from '../components/Layout';
+import { PageLayout, SlimContainer } from '../components/Layout';
 import { cms, gql } from '../modules/api';
 
 interface ProfileProps {
@@ -14,7 +14,9 @@ const Profile = ({
   page: { title, content, seoDescription },
 }: ProfileProps) => (
   <PageLayout seoDescription={seoDescription} title={title}>
-    <Markdown content={content} />
+    <SlimContainer>
+      <Markdown content={content} />
+    </SlimContainer>
   </PageLayout>
 );
 

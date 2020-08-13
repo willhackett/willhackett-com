@@ -1,8 +1,10 @@
-import { ArticleList, ArticlePreviewProps } from '../../components/Article';
-import { LargeHeading } from '../../components/Heading';
+import {
+  ArticleList,
+  ArticlePreviewProps,
+  ArticleContentFragment,
+} from '../../components/Article';
 import { Markdown } from '../../components/Content';
-import Layout from '../../components/Layout/PageLayout';
-
+import { PageLayout, SlimContainer } from '../../components/Layout';
 import { cms, gql } from '../../modules/api';
 
 type InsightsPageProps = {
@@ -10,22 +12,25 @@ type InsightsPageProps = {
     title: string;
     content: string;
   };
-  insights: ArticlePreviewProps[];
+  articles: ArticlePreviewProps[];
 };
 
 const InsightsPage = ({
   page: { title, content },
-  insights,
+  articles,
 }: InsightsPageProps) => (
-  <Layout>
-    <LargeHeading>{title}</LargeHeading>
-    <Markdown content={content} />
-    <hr />
-    <ArticleList articles={insights} />
-  </Layout>
+  <PageLayout>
+    <SlimContainer>
+      <h1>{title}</h1>
+      <Markdown content={content} />
+      <hr />
+      <ArticleList articles={articles} />
+    </SlimContainer>
+  </PageLayout>
 );
 
 const pageQuery = gql`
+  ${ArticleContentFragment}
   query InsightsPageQuery {
     page(where: { slug: "/insights" }) {
       title
