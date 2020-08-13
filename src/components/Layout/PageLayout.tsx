@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
-import Header from './Header';
-import Container from './Container';
+import Header from '../Header';
+import Container from './SlimContainer';
 
 type Props = {
   children?: ReactNode;
@@ -10,7 +10,7 @@ type Props = {
   seoDescription?: string;
 };
 
-const Layout = ({
+const PageLayout = ({
   children,
   title = 'This is the default title',
   seoDescription,
@@ -23,8 +23,8 @@ const Layout = ({
       <meta name="description" content={seoDescription} />
     </Head>
     <Header />
+    <main>{children}</main>
     <Container>
-      <main>{children}</main>
       <footer>
         <hr />
         <span>© {new Date().getFullYear()} Will Hackett</span>
@@ -33,4 +33,4 @@ const Layout = ({
   </div>
 );
 
-export default Layout;
+export default PageLayout;

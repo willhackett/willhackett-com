@@ -1,61 +1,47 @@
-import cms from '../../modules/cms';
 import { GetServerSidePropsContext } from 'next';
-import Markdown from '../../components/Markdown';
 
-interface PostProps {
-  title: string;
-  excerpt: string;
-  content: string;
-}
+import {
+  ArticleProps,
+  ArticleContent,
+  ArticleContentFragment,
+} from '../../components/Article';
 
-interface RouteProps {
+import { cms, gql } from '../../modules/api';
+import { PageLayout, SlimContainer } from '../../components/Layout';
+
+interface RouteParams {
   [slug: string]: string | string[];
 }
 
-const Post = ({ title, content }: PostProps) => (
-  <div>
-    <h1>{title}</h1>
-    <Markdown content={content} />
-  </div>
+interface InsightArticleProps {
+  article: ArticleProps;
+}
+
+const InsightArticle = ({ article }: InsightArticleProps) => (
+  <PageLayout>
+    <SlimContainer>
+      <ArticleContent {...article} />
+    </SlimContainer>
+  </PageLayout>
 );
 
-export default Post;
+export default InsightArticle;
+
+const pageQuery = gql`
+  ${ArticleContentFragment}
+  query InsightArticleQuery($slug: String!) {
+    article(where: { slug: $slug }) {
+      ...ArticleContent
+    }
+  }
+`;
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext<RouteProps>
+  context: GetServerSidePropsContext<RouteParams>
 ) => {
-  const slug = context.params?.slug as string;
+  const props = await cms.request(pageQuery, context.params);
 
-  console.log(slug);
-
-  if (!slug) {
-    return {};
-  }
-
-  try {
-    const { data } = await cms.request(
-      `
-        query InsightQuery($slug: String!) {
-          insight(where: { slug: $slug }) {
-            title
-            excerpt
-            content
-          }
-        }
-      `,
-      {
-        slug,
-      }
-    );
-
-    if (!data.insight) {
-      return null;
-    }
-
-    return {
-      props: data.insight,
-    };
-  } catch {
-    return null;
-  }
+  return {
+    props,
+  };
 };

@@ -18,10 +18,19 @@ body{
 a {
   color: #001D33;
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: ${GARAMOND_FONT};
   font-weight: 400;
   letter-spacing: 0.09rem;
+}
+h4, h5, h6 {
+  font-family: ${LATO_FONT};
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+h3 {
+
 }
 `;
 

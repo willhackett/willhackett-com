@@ -1,5 +1,5 @@
-import Layout from '../components/Layout';
-import Markdown from '../components/Markdown';
+import { Markdown } from '../components/Content';
+import { PageLayout } from '../components/Layout';
 
 import cms from '../modules/cms';
 
@@ -14,9 +14,9 @@ interface ProfileProps {
 const Profile = ({
   page: { title, content, seoDescription },
 }: ProfileProps) => (
-  <Layout title={title} seoDescription={seoDescription}>
+  <PageLayout title={title} seoDescription={seoDescription}>
     <Markdown content={content} />
-  </Layout>
+  </PageLayout>
 );
 
 export default Profile;

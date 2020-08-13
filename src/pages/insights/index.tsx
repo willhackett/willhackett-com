@@ -1,66 +1,48 @@
-import Layout from '../../components/Layout';
-import Markdown from '../../components/Markdown';
-import InsightLink from '../../components/InsightLink';
+import { ArticleList, ArticlePreviewProps } from '../../components/Article';
 import { LargeHeading } from '../../components/Heading';
+import { Markdown } from '../../components/Content';
+import Layout from '../../components/Layout/PageLayout';
 
-import cms from '../../modules/cms';
+import { cms, gql } from '../../modules/api';
 
 type InsightsPageProps = {
   page: {
+    title: string;
     content: string;
   };
-  insights: {
-    id: string;
-    title: string;
-    slug: string;
-    excerpt: string;
-    coverImage: {
-      url: string;
-    };
-  }[];
+  insights: ArticlePreviewProps[];
 };
 
-const InsightsPage = ({ page: { content }, insights }: InsightsPageProps) => (
+const InsightsPage = ({
+  page: { title, content },
+  insights,
+}: InsightsPageProps) => (
   <Layout>
-    <LargeHeading>Insights</LargeHeading>
+    <LargeHeading>{title}</LargeHeading>
     <Markdown content={content} />
     <hr />
-    {(() => {
-      const ct = [];
-      for (let i = 0; i < Math.ceil(insights.length / 3); i++) {
-        ct.push(
-          <div key={i} className="row">
-            {insights.slice(0 + i, 3 + i).map((insight) => (
-              <InsightLink key={insight.id} {...insight} />
-            ))}
-          </div>
-        );
-      }
-      return ct;
-    })()}
+    <ArticleList articles={insights} />
   </Layout>
 );
 
+const pageQuery = gql`
+  query InsightsPageQuery {
+    page(where: { slug: "/insights" }) {
+      title
+      seoDescription
+      content
+    }
+    articles {
+      ...ArticleContent
+    }
+  }
+`;
+
 export const getServerSideProps = async () => {
   try {
-    const { data } = await cms.request(`
-        query {
-          page(where: { slug: "/insights" }) {
-            title
-            seoDescription
-            content
-          }
-          insights{
-            id
-            title
-            slug
-            excerpt
-            coverImage{
-              url(transformation:{image:{resize:{width:300}}})
-            }
-          }
-        }
-      `);
+    const data = await cms.request(pageQuery);
+
+    console.log('DATA', data);
 
     return {
       props: data,

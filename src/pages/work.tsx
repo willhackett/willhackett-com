@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import { PageLayout } from '../components/Layout';
 
 import cms from '../modules/cms';
 
@@ -23,10 +23,10 @@ import cms from '../modules/cms';
 // )
 
 const Work = () => (
-  <Layout>
+  <PageLayout>
     <h1>Work</h1>
     <p>Experience</p>
-  </Layout>
+  </PageLayout>
 );
 
 export default Work;
