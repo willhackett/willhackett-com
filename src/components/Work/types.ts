@@ -1,4 +1,5 @@
 interface WorkPropsBase {
+  id: string;
   title: string;
   endDate: Date;
 }

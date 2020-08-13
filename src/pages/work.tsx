@@ -1,52 +1,48 @@
-import { PageLayout } from '../components/Layout';
-import cms from '../modules/cms';
+import { PageLayout, SlimContainer } from '../components/Layout';
+import { ExperienceProps, ExperienceList } from '../components/Work';
+import { cms, gql } from '../modules/api';
 
-// interface WorkExperienceProps {
-//   dateFrom:
-// }
+interface WorkProps {
+  experience: ExperienceProps[];
+}
 
-// const WorkExperienceLine = () => (
-//   <div className="row">
-//     <div className="column">
-
-//     </div>
-//   </div>
-// )
-
-// const Logo = () => (
-// <div />
-// )
-
-// const Project = () => (
-// <div />
-// )
-
-const Work = () => (
+const Work = ({ experience }: WorkProps) => (
   <PageLayout>
-    <h1>Work</h1>
-    <p>Experience</p>
+    <SlimContainer>
+      <h1>Work</h1>
+      <h4>Commercial Experience</h4>
+      <ExperienceList experience={experience} />
+    </SlimContainer>
   </PageLayout>
 );
 
 export default Work;
 
-export const getServerSideProps = async () => {
-  try {
-    const { data } = await cms.request(`
-        query {
-
-          page(where: { slug: "/profile" }) {
-            title
-            seoDescription
-            content
-          }
-        }
-      `);
-
-    return {
-      props: data,
-    };
-  } catch {
-    return null;
+const pageQuery = gql`
+  query WorkPageQuery {
+    page(where: { slug: "/work" }) {
+      title
+      seoDescription
+      content
+    }
+    experience: workHistory(where: { type: CommercialExperience }) {
+      id
+      current
+      endDate
+      logo {
+        url
+      }
+      startDate
+      title
+      workedOn
+    }
   }
+`;
+
+export const getServerSideProps = async () => {
+  const props = await cms.request(pageQuery);
+
+  return {
+    props,
+  };
 };
