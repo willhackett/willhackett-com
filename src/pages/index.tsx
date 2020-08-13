@@ -24,26 +24,34 @@ const InsightsTitle = styled.div`
   margin-top: 5rem;
 `;
 
-const IndexPage = ({
-  articles,
-  page: { title, content, seoDescription },
-}: IndexProps) => (
-  <PageLayout seoDescription={seoDescription} title={title}>
-    <BioHeading>
-      <Markdown content={content} />
-    </BioHeading>
+const IndexPage = (props: IndexProps) => {
+  if (!props) {
+    return <div>Under construction.</div>;
+  }
 
-    <SlimContainer>
-      <hr />
+  const {
+    articles,
+    page: { title, content, seoDescription },
+  } = props;
 
-      <InsightsTitle>
-        <h4>Insights</h4>
-      </InsightsTitle>
+  return (
+    <PageLayout seoDescription={seoDescription} title={title}>
+      <BioHeading>
+        <Markdown content={content} />
+      </BioHeading>
 
-      <ArticleList articles={articles} />
-    </SlimContainer>
-  </PageLayout>
-);
+      <SlimContainer>
+        <hr />
+
+        <InsightsTitle>
+          <h4>Insights</h4>
+        </InsightsTitle>
+
+        <ArticleList articles={articles} />
+      </SlimContainer>
+    </PageLayout>
+  );
+};
 
 export default IndexPage;
 
@@ -62,14 +70,17 @@ const pageQuery = gql`
 
 export const getServerSideProps = async ({
   req,
+  res,
 }: GetServerSidePropsContext) => {
   if (process.env.NODE_ENV === 'production') {
-    if (
-      ['117.20.66.181', '117.20.66.182', '49.177.130.159'].includes(
-        (req.headers['x-real-ip'] as string) || ''
-      ) === false
-    ) {
-      throw new Error('Not Authorised');
+    const ip = req.headers['x-real-ip'] as string;
+    const ipWhitelist = process.env.IP_WHITELIST;
+
+    if (!ipWhitelist || ipWhitelist.includes(ip) === false) {
+      res.statusCode = 401;
+      return {
+        props: null,
+      };
     }
   }
 
