@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import Experience from '../Experience';
 
@@ -8,6 +8,7 @@ const startDate = new Date('2010-01-01');
 const baseProps = {
   current: false,
   endDate,
+  id: '1',
   logo: {
     url: 'logo.svg',
   },
@@ -50,7 +51,7 @@ describe('<Experience />', () => {
     const body = document.querySelector('.column:nth-child(2)').innerHTML;
 
     expect(body).toMatchInlineSnapshot(
-      `"<img src=\\"logo.svg\\" title=\\"Employer\\">"`
+      `"<a href=\\"logo.svg\\" rel=\\"noopener noreferrer\\" target=\\"_blank\\"><img src=\\"logo.svg\\" title=\\"Employer\\"></a>"`
     );
   });
 });

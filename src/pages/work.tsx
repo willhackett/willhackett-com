@@ -10,8 +10,21 @@ const Work = ({ experience }: WorkProps) => (
   <PageLayout>
     <SlimContainer>
       <h1>Work</h1>
-      <h4>Commercial Experience</h4>
+      <hgroup>
+        <h5>Commercial Experience</h5>
+        <p>Places I have worked.</p>
+      </hgroup>
       <ExperienceList experience={experience} />
+      <hr style={{ margin: '4rem auto' }} />
+      <hgroup>
+        <h5>Consulting Experience</h5>
+        <p>Clients I have worked with.</p>
+      </hgroup>
+      <hr style={{ margin: '4rem auto' }} />
+      <hgroup>
+        <h5>Projects</h5>
+        <p>{"Work I'm proud of that I'd like to share."}</p>
+      </hgroup>
     </SlimContainer>
   </PageLayout>
 );

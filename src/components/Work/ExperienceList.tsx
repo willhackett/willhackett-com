@@ -7,12 +7,15 @@ interface ExperienceListProps {
   experience: ExperienceProps[];
 }
 
-const ExperienceList = ({ experience }: ExperienceListProps) =>
-  experience.map((work, index) => (
-    <Fragment key={work.id}>
-      <Experience {...work} />
-      {index < experience.length - 1 && <hr />}
-    </Fragment>
-  ));
+const ExperienceList = ({ experience }: ExperienceListProps) => (
+  <>
+    {experience.map((work, index) => (
+      <Fragment key={work.id}>
+        <Experience {...work} />
+        {index < experience.length - 1 && <hr />}
+      </Fragment>
+    ))}
+  </>
+);
 
 export default ExperienceList;

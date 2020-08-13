@@ -54,13 +54,6 @@ const Experience = ({
   workedOn,
 }: ExperienceProps) => (
   <Root>
-    <ExperienceLogo className="column">
-      {logo && (
-        <a href={logo.url} rel="noopener noreferrer" target="_blank">
-          <img src={logo.url} title={title} />
-        </a>
-      )}
-    </ExperienceLogo>
     <ExperienceDateRange className="column">
       <time dateTime={m(startDate).toISOString()}>
         {m(startDate).format(DATE_FORMAT)}
@@ -74,6 +67,13 @@ const Experience = ({
         </>
       )}
     </ExperienceDateRange>
+    <ExperienceLogo className="column">
+      {logo && (
+        <a href={logo.url} rel="noopener noreferrer" target="_blank">
+          <img src={logo.url} title={title} />
+        </a>
+      )}
+    </ExperienceLogo>
     <div className="column">{workedOn}</div>
   </Root>
 );
